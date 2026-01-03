@@ -1,0 +1,122 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome — James Healy",
+    "section": "",
+    "text": "I’m a first-year undergraduate physics student at the University of Bristol, and I build computational and experimental projects that combine physics, math, and code.\nYou can explore some of my work below:\n\n\n\n\nA numerical simulation of the three-body problem, written in C#.\nShows gravitational dynamics between three interacting bodies.\n\n\n\nThe complete Millikan oil drop experiment report from first-year labs — with data analysis code in Python and the final formal write-up included.\n\n\n\nC# code developed as part of my Extended Project Qualification (EPQ) along with the written essay.\n\n\n\n\n\nCheck out all of these and more on my GitHub:\n👉 https://github.com/Jdev31",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site",
+    "crumbs": [
+      "About"
+    ]
+  },
+  {
+    "objectID": "Introduction.html",
+    "href": "Introduction.html",
+    "title": "Welcome — James Healy",
+    "section": "",
+    "text": "I’m a first-year undergraduate physics student at the University of Bristol, and I build computational and experimental projects that combine physics, math, and code.\nYou can explore some of my work below:\n\n\n\n\nA numerical simulation of the three-body problem, written in C#.\nShows gravitational dynamics between three interacting bodies.\n\n\n\nThe complete Millikan oil drop experiment report from first-year labs — with data analysis code in Python and the final formal write-up included.\n\n\n\nC# code developed as part of my Extended Project Qualification (EPQ) along with the written essay.\n\n\n\n\n\nCheck out all of these and more on my GitHub:\n👉 https://github.com/Jdev31",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "Introduction.html#featured-projects",
+    "href": "Introduction.html#featured-projects",
+    "title": "Welcome — James Healy",
+    "section": "",
+    "text": "A numerical simulation of the three-body problem, written in C#.\nShows gravitational dynamics between three interacting bodies.\n\n\n\nThe complete Millikan oil drop experiment report from first-year labs — with data analysis code in Python and the final formal write-up included.\n\n\n\nC# code developed as part of my Extended Project Qualification (EPQ) along with the written essay.",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "Introduction.html#find-me-online",
+    "href": "Introduction.html#find-me-online",
+    "title": "Welcome — James Healy",
+    "section": "",
+    "text": "Check out all of these and more on my GitHub:\n👉 https://github.com/Jdev31",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "Terrel_Penrose.html",
+    "href": "Terrel_Penrose.html",
+    "title": "Simulating the Relatvistic Terrel-Penrose Effect",
+    "section": "",
+    "text": "This project aimed at comparing the effects length contraction to the the visual apperance of shapes at relativistic speeds. Until 1959 the visual apperance 3D objects was not considered, only the physical effects in different reference frames. Rodger Penrose and James Terrell, then independantly showed objects tend to rotate instead of contract at relativistic speeds.\nThis project was developed using C# and the Unity Engine, making use of the MathNet Numerics library for the Linear Algebra",
+    "crumbs": [
+      "Simulating the Relatvistic Terrel-Penrose Effect"
+    ]
+  },
+  {
+    "objectID": "Terrel_Penrose.html#relativistic-doppler-effect",
+    "href": "Terrel_Penrose.html#relativistic-doppler-effect",
+    "title": "Simulating the Relatvistic Terrel-Penrose Effect",
+    "section": "Relativistic Doppler Effect",
+    "text": "Relativistic Doppler Effect",
+    "crumbs": [
+      "Simulating the Relatvistic Terrel-Penrose Effect"
+    ]
+  },
+  {
+    "objectID": "TerrelPenrosePage/Terrel_Penrose.html",
+    "href": "TerrelPenrosePage/Terrel_Penrose.html",
+    "title": "Simulating the Relativistic Terrel-Penrose Effect",
+    "section": "",
+    "text": "Introduction\nThis project aimed at comparing the effects length contraction to the the visual appearance of shapes at relativistic speeds. Until 1959 the visual appearance 3D objects was not considered, only the physical effects in different reference frames. Rodger Penrose and James Terrell, then independently showed objects tend to rotate instead of contract at relativistic speeds.\nThis project was developed using C# and the Unity Engine, making use of the MathNet Numerics library for the Linear Algebra\n\n\nConverting The Lorentz Transformation into 3D Space.\nThis project will be focusing on inertial frames of reference, and visualising effects in 3D. First Einsteins physical length contraction with be modeled in three dimensional space. Building off of my Lecture notes  [1], The lorentz transformation was given found in 1 dimensional space, assuming that all velocities were in the x direction, as shown here:\n\\[\n\\begin{aligned}\nt &= \\gamma\\left(t' + \\frac{v x'}{c^2}\\right), \\\\\nx &= \\gamma\\left(x' + v t'\\right), \\\\\ny &= y', \\\\\nz &= z',\n\\end{aligned}\n\\tag{1}\\]\nwhere\n\n(t, x, y, z) are the time and spatial coordinates of an event measured in frame (F),\n(t’, x’, y’, z’) are the corresponding coordinates measured in frame (F’),\n(v) is the relative velocity of frame (F’) with respect to frame (F) along the (x)-axis,\n(c) is the speed of light in vacuum,\n(\\(\\gamma\\)) is the Lorentz factor, defined by\n\n\\[\n\\gamma = \\frac{1}{\\sqrt{1 - \\frac{v^2}{c^2}}}.\n\\]\nThis can then be converted to three dimensional space with use of the vectors \\(\\vec{r}\\) and \\(\\vec{v}\\) where \\(\\vec{r}\\) is the position vector, \\(\\vec{v}\\) is the velocity in reference frame \\(F\\). The position vector with respect to the origin in frame \\(F'\\) can then be written as: \\[\\vec{r}'= r_{\\perp} + \\gamma (r_{\\parallel} + vt)\\hat{r}_{\\parallel}\n\\\n\\tag{2}\\]\nwhere \\(t\\) is time in frame \\(F\\), and \\(\\vec{r}_{\\parallel}\\) and \\(\\vec{r}_{\\perp}\\) represent its parallel and perpendicular components with respect to \\(\\vec{v}\\).\nNoting the equations \\[\n\\vec{r}_{\\perp} = \\vec{r} - \\vec{r}_{\\parallel}\n\\] \\[\n\\vec{r}_{\\parallel} = \\frac{(\\vec{r} \\cdot \\vec{v})}{v^2}\\vec{v}\n\\]\nThese can be subbed into Equation 2 to obtain \\[\n\\vec{r}' = \\vec{r} + (\\gamma - 1)\\frac{\\vec{r} \\cdot \\vec{v}}{v^2}\\vec{v} - \\gamma \\vec{v}t\n\\tag{3}\\]\nIn addition to this, converting the lorentz transformation for \\(t'\\) into vector form we obtain the equation \\[\nt' = \\gamma ( t - \\frac{(v \\cdot \\vec{r}_{\\parallel})}{c^2})\n\\tag{4}\\]\nSubstituting (Equation 3) and (Equation 4) yields the \\(4 \\times 4\\) matrix for a general Lorentz transformation. This transformation is known as a Lorentz boost  [2]  [3]. \\[\n\\begin{pmatrix}\nct' \\\\\nx' \\\\\ny' \\\\\nz'\n\\end{pmatrix}\n=\n\\begin{pmatrix}\n\\gamma\n& -\\dfrac{\\gamma}{c} v_x\n& -\\dfrac{\\gamma}{c} v_y\n& -\\dfrac{\\gamma}{c} v_z\n\\\\[6pt]\n-\\dfrac{\\gamma}{c} v_x\n& 1 + (\\gamma - 1)\\dfrac{v_x^2}{v^2}\n& (\\gamma - 1)\\dfrac{v_x v_y}{v^2}\n& (\\gamma - 1)\\dfrac{v_x v_z}{v^2}\n\\\\[6pt]\n-\\dfrac{\\gamma}{c} v_y\n& (\\gamma - 1)\\dfrac{v_y v_x}{v^2}\n& 1 + (\\gamma - 1)\\dfrac{v_y^2}{v^2}\n& (\\gamma - 1)\\dfrac{v_y v_z}{v^2}\n\\\\[6pt]\n-\\dfrac{\\gamma}{c} v_z\n& (\\gamma - 1)\\dfrac{v_z v_x}{v^2}\n& (\\gamma - 1)\\dfrac{v_z v_y}{v^2}\n& 1 + (\\gamma - 1)\\dfrac{v_z^2}{v^2}\n\\end{pmatrix}\n\\begin{pmatrix}\nct \\\\\nx \\\\\ny \\\\\nz\n\\end{pmatrix}\n\\tag{5}\\]\nThe Lorentz boost is then applied to all the vertices of the shape in question. However the time at each vertex depends on its distance from the origin. Let the origin be the observer in our script and let its frame of reference be \\(F\\). While the frame of reference for the vertices if \\(F'\\). Our known values are the constant time \\(t\\) in frame \\(F\\) and the positions of the vertices in frame \\(F'\\), as the position values are related to \\(t\\) we first need to do the inverse lorentz transformation of \\(t\\) to get \\(t'\\) to then correctly calculate the positions of the vertices in the observer reference frame \\(F\\). Note, the inverse lorentz transformation can just be found by using the negative velocity, the same property as the Galilean transformation.\nThis matrix transform was then applied to each vertex for a cube and sphere, shown in Figure 1\n\n\n\n\n\n\nFigure 1: Relativistic length contraction. Comparison of a cube and sphere at rest versus \\(0.99c\\).\n\n\n\n\n\nApplying the Terrel-Penrose Effect\nWhile the lorentz contraction is a physical effect shown at relativistic speeds, when taking into account the velocity of the object traveling at fractions of the speed of light, the speed of light cannot be thought of as reaching the observer instantaneously. This means that photons leaving an object at the same time but not at exactly the same point, wont reach the observer at the same time, causing the object to look warped.\n\n\n\n\n\n\nFigure 2: Diagram of the Terrell-Penrose effect where the observer is below the length contracted sphere  [4].\n\n\n\nThis can be solved by creating a quadratic equation between the distance between vertices along teh same axis for simple geometric shapes  [5], however a simpler solution can be done using the equation below: \\[\n\\vec{r_1} = r_0 - \\vec{\\beta}  \\|{r_0}\\|  \n\\tag{6}\\]\nwhere \\(r_1\\) is the updated position of the vertex, \\(r_0\\) is the initial position of the vertex and \\(\\vec{\\beta} = \\vec{v}/c\\). This equation can be used as the velocity is constant.\n\nImplementation of Equation 5 and Equation 6 within the Unity engine allows for the simulation of relativistic effects from arbitrary observer perspectives. A simulation of a cube moving laterally past the observer at \\(0.9c\\) is demonstrated in Figure 3, where the predicted Terrell-Penrose rotation becomes visible; the cube appears to twist, revealing its trailing faces to a stationary observer.\n\n\n\n\n\n\nFigure 3: Simulation of a cube in lateral motion at \\(v = 0.9c\\). Directional light source is placed behind the Observer.\n\n\n\nSimilar to Figure 3 a sphere was modeled at \\(0.9c\\) however it was raised slightly above the position of the observer, which can be compared to Figure 2 from A snapshot of relativistic motion: visualising the Terrell-Penrose effect  [4]. This simulation is shown in Figure 4\n\n\n\n\n\n\nFigure 4: Simulation of a Sphere passing the observer at \\(v = 0.9c\\) where it is raised slightly above the observers point of view. Directional light source is placed behind the Observer.\n\n\n\nFigure 4 is slightly different to Figure 2, this is due to Figure 2 Using an imaginary observer view to visualise the effect. Figure 2 shows the apparent visual effect seen by an observer directly below the sphere, however we are observing this effect orthogonally to the actual observer and the velocity of the object. Which would show a different rotation, meaning the figure described is not what is actually seen. It does however, provide a very good method for visualising the effect, an example is shown in Figure 5 below.\n\n\n\n\n\n\nFigure 5: Simulation of a blue cube passing directly above an observer, in green, at \\(v = 0.99c\\). The imaginary observer is used to give a better reference of the Terrel-Penrose effect seen by the real observer.\n\n\n\nThis code provides a simulation for any shape or mesh that is imported into the the Unity Project for a constant velocity. It allows for a very easy way of understanding the Terrel-Penrose Effect.\n\n\nRelativistic Doppler Effect\nThe Relativistic Doppler Effect is the same as the non relativistic doppler effect but also accounts for the time dilation of special relativity. Unlike the classical Doppler effect for sound, which depends on motion relative to a medium, the relativistic version depends only on the relative velocity between the two parties. Although the formula as simple, I have not applied it yet as “visual light” wavelengths can very easily be shifted into other parts of the electromagnetic spectrum meaning it is not visible to the viewer. Therefore some form of mapping and key would have to introduced. In addition to this, colors stored on a computer can be represents by infinite combinations of wavelengths that would necessarily be doppler shifted exactly the same, making the shift arbitrary  [6]. If it were to be implemented, an approach of using the dominant wavelength would be found that that would be shifted. While also taking into account shifting out of the visible light spectrum.\n\n\n\n\n\n\n\n\nReferences\n\n[1] A. Reynolds, Special Relativity, https://alan-reynolds.quarto.pub/special-relativity/.\n\n\n[2] Wikipedia contributors, Lorentz transformation, (2025).\n\n\n[3] Deriving the General Lorentz Transformation, Deriving the General Lorentz Transformation | Special Relativity, https://www.youtube.com/watch?v=Afd34FuG65A&t=331s.\n\n\n[4] D. Hornof, V. Helm, E. de Dios Rodriguez, T. Juffmann, P. Haslinger, and P. Schattschneider, A snapshot of relativistic motion: Visualizing the terrell-penrose effect, Communications Physics 8, 161 (2025).\n\n\n[5] A. York, Terrell-Penrose Effect for Objects Approaching Relativistic Velocities, https://andrewyork.net/Math/TerrellRotation_York.html.\n\n\n[6] Wikipedia contributors, Metamerism (color) — Wikipedia, the free encyclopedia, (2025).",
+    "crumbs": [
+      "Terrell-Penrose Effect"
+    ]
+  },
+  {
+    "objectID": "TerrelPenrosePage/Terrel_Penrose.html#relativistic-doppler-effect",
+    "href": "TerrelPenrosePage/Terrel_Penrose.html#relativistic-doppler-effect",
+    "title": "Simulating the Relatvistic Terrel-Penrose Effect",
+    "section": "Relativistic Doppler Effect",
+    "text": "Relativistic Doppler Effect\nThe Relativistic Doppler Effect describes the shift in the frequency and wavelength of light caused by the relative motion between a source and an observer, while accounting for the time dilation of special relativity. Unlike the classical Doppler effect for sound, which depends on motion relative to a medium, the relativistic version depends only on the relative velocity between the two parties. As an object approaches at a fraction of the speed of light, the observed waves are compressed, leading to a “blueshift” toward higher frequencies; conversely, as it recedes, the waves are stretched, resulting in a “redshift.” In a simulation, this would manifest as a dramatic color transformation, where a receding object might shift from visible light into the infrared spectrum, effectively disappearing from sight.",
+    "crumbs": [
+      "Simulating the Relatvistic Terrel-Penrose Effect"
+    ]
+  },
+  {
+    "objectID": "TerrelPenrosePage/Terrel_Penrose.html#relativistic-aberration",
+    "href": "TerrelPenrosePage/Terrel_Penrose.html#relativistic-aberration",
+    "title": "Simulating the Relatvistic Terrel-Penrose Effect",
+    "section": "Relativistic Aberration",
+    "text": "Relativistic Aberration\nRelativistic aberration is the change in the apparent direction of light rays for an observer moving at high speeds. As your velocity increases, the incoming light from the surrounding environment appears to “tilt” or concentrate toward your direction of motion, a phenomenon often called the “headlight effect” or “relativistic beaming.” From the perspective of a fast-moving observer, the field of view in front appears compressed and magnified, while the view behind seems to expand and empty out. This effect ensures that even objects located to the side or slightly behind the observer can appear within the forward-facing field of view, significantly warping the perceived geometry of the surrounding space. # References",
+    "crumbs": [
+      "Simulating the Relatvistic Terrel-Penrose Effect"
+    ]
+  },
+  {
+    "objectID": "index.html#featured-projects",
+    "href": "index.html#featured-projects",
+    "title": "Welcome — James Healy",
+    "section": "",
+    "text": "A numerical simulation of the three-body problem, written in C#.\nShows gravitational dynamics between three interacting bodies.\n\n\n\nThe complete Millikan oil drop experiment report from first-year labs — with data analysis code in Python and the final formal write-up included.\n\n\n\nC# code developed as part of my Extended Project Qualification (EPQ) along with the written essay.",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "index.html#find-me-online",
+    "href": "index.html#find-me-online",
+    "title": "Welcome — James Healy",
+    "section": "",
+    "text": "Check out all of these and more on my GitHub:\n👉 https://github.com/Jdev31",
+    "crumbs": [
+      "Introduction"
+    ]
+  }
+]

@@ -1,0 +1,32 @@
+---
+title: "Welcome — James Healy"
+format:
+  html:
+    toc: false
+    theme: cosmo
+---
+
+# Hi, I’m James Healy
+
+I’m a first-year undergraduate **physics student at the University of Bristol**, and I build computational and experimental projects that combine physics, math, and code.
+
+You can explore some of my work below:
+
+## 🚀 Featured Projects
+
+### **GravitySim**
+A numerical simulation of the **three-body problem**, written in C#.  
+Shows gravitational dynamics between three interacting bodies.
+
+### **OilDropExp**
+The complete **Millikan oil drop experiment** report from first-year labs — with data analysis code in Python and the final formal write-up included.
+
+### **ArtifactCode**
+C# code developed as part of my **Extended Project Qualification (EPQ)** along with the written essay.
+
+---
+
+## 📫 Find me online
+
+Check out all of these and more on my GitHub:  
+👉 https://github.com/Jdev31
