@@ -1,0 +1,4 @@
+# Quarto internal files
+/.quarto/
+
+**/*.quarto_ipynb
