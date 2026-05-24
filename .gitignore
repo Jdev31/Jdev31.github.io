@@ -1,4 +1,4 @@
 # Quarto internal files
-/.quarto/
+.quarto
+.vscode
 
-**/*.quarto_ipynb
