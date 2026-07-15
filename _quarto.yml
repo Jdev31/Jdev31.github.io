@@ -11,8 +11,10 @@ website:
         text: "Introduction"  # Changed from Home to Introduction
       - href: TerrelPenrosePage/Terrel_Penrose.qmd
         text: "Terrell-Penrose Effect" # Optional: adds a cleaner title
-      - href: about.qmd
-        text: "About"
+      - href: QEC/RepetitionCode/RepetitionCode.qmd
+        text: "RepetitionCode"
+      - href: QEC/UF_Decoder/UF_Decoder.qmd
+        text: "Union Find Decoder"
 
 format:
   html:

@@ -1,14 +1,27 @@
-# Quantum Error Correction from Scratch: Building a Repetition Code with STIM
+---
+title: "Quantum Error Correction from Scratch: Building a Repetition Code with STIM"
+format:
+  html:
+    toc: true
+    theme: cosmo
+bibliography: repetition_codebib.bib
+csl: /mnt/storage/Programming/Website/american-physics-society.csl
+css: /mnt/storage/Programming/Website/styles.css
+---
 
-### Why QEC matters
+
+
+### Why Quantum Error Correction Matters
 Quantum Computers are known to be notoriously easy to disturb, and inherently noisy. Gate errors, decoherence  and measurement errors can all lead to corrupt computation.  Although errors have decreased dramatically through refined engineering, there is still massive need for error correction via classical computation. This short project follows Googles quantum course on quantum error correction and builds up a simple circuit for repetition code to correct for bit flips (X-errors) using `stim`. This essay is a brief method for consolidating what I have learnt so far. 
 
 ### The Repetition Code
-The repetition code works by building a logical qubit out of multiple data qubits that should all individually represent the logical cubit, and a majority vote from all the data qubits is used to remove errors. An example of this is a logical $\ket{0}$ encoded as $\ket{000...0}$. If the total data qubits used is d, aslong as there are less then or equal to $(d-1)/2$ errors, the logical qubit will not be corrupted. As the number of data qubits increases, the total number of qubits needed to fail increases linearly and the probability of all of the failing decreases **"exponentially"**  meaning more qubits means more protection, with quantum error correcting codes usually needing at least 1000 qubits to work. The caveat of this specific code is it only protects against bit-flip errors, other errors like phase flip errors are not measured, however it is a good starting point as it is the most intuitive introductory method. 
+The repetition code works by building a logical qubit out of multiple data qubits that should all individually represent the logical cubit, and a majority vote from all the data qubits is used to remove errors. An example of this is a logical $\ket{0}$ encoded as $\ket{000...0}$. If the total data qubits used is d, aslong as there are less then or equal to $(d-1)/2$ errors, the logical qubit will not be corrupted. 
+
+As the number of data qubits increases, the total number of qubits needed to fail increases linearly and the probability of all of the failing decreases "exponentially" showing that small increases in code distance are increasingly more effective. The caveat of this specific code is it only protects against bit-flip errors, other errors like phase flip errors are not measured, however it is a good starting point as it is the most intuitive introductory method. 
 
 The method of measuring these qubits can be shown in the diagram below, where the states are linked via the CNOT gates which copy the state across
 
-![](simple_rep_circuit.png)
+![](rep_figures/simple_rep_circuit.png)
 
 
 The circuit above shows a distance-3 repetition code with 5 qubits in total. **q0, q2, and q4** are the three data qubits that together encode the single logical qubit, while **q1 and q3** are ancilla (measurement) qubits used to detect errors without directly reading the data.
@@ -25,31 +38,32 @@ The circuit proceeds in four broad stages, separated by the bracket groupings al
 
 ## Building the Circuit Programmatically
 
-After building a repetition code for distance 3 by hand, I automated it using the function create_rep_code_stim_string(distance, rounds, p). There are three structural phases to the circuit. There first, resets all of the cubits, then has the first round of measurements, then has detectors that compare to the the exepected initial values of the qubits. The second block, which represents every round apart from the first and last, reset the ancillas only, and repeat CNOT sweeps then measures. Detectors are the created between the previous measurement on and current measuments for each respective ancilla circuit. In the final block, data qubits are measured and compared to a final set of ancilla measurments to create the final detectors. 
+After building a repetition code for distance 3 by hand, I automated it using the function `create_rep_code_stim_string(distance, rounds, p)` which can be found in the `rep_code.ipynb` jupyter notebook. There are three structural phases to the circuit. There first, resets all of the qubits, then has the first round of measurements, then has detectors that compare to the the exepected initial values of the qubits. The second block, which represents every round apart from the first and last, reset the ancillas only, and repeat CNOT sweeps then measures. Detectors are the created between the previous measurement on and current measuments for each respective ancilla circuit. In the final block, data qubits are measured and compared to a final set of ancilla measurments to create the final detectors. 
 
 Detectors "comparing measurments" represents them comparing the parity of the measurments, if they are both even or both odd, no error is flagged, if they are of different paritys, then an error is flagged.
 
-## Comparing to Stims Built in circuit
-Stim obvisouly has a built in version method of this function using `stim.Circuit.generated("repetition_code:memory", rounds=..., distance=..., before_round_data_depolarization=p)` However  as shown in the figure below applies noise at less points and is therefore is a less accurate model. The custom model   
+<!-- ## Comparing to Stims Built in circuit
+Stim has a built in version method of this function using `stim.Circuit.generated("repetition_code:memory", rounds=..., distance=..., before_round_data_depolarization=p)` However  as shown in the figure below applies noise at less points and is therefore is a less accurate model. The custom model   
 
-![](stim_default.png)
+![](simple_rep_circuit_1.png) -->
 
 
 ## Decoding with PyMatching 
-Using the decoders these can be inputted into the pymatchin librarys' method `Pymatching.Matching.decode_batch`. This method uses Minimum weight perfect matching (MWPM) to decode the system. This can described by: building a graph where the detectors are nodes and the possible error mechanisms are edges, weighted by their probability of causing the error. **related to length of circuit by -log(l)?** parings are found for the detectors such that the total edge weight is minimised. This represents the "simplest" explanation for what went wrong. Pymatching was used as it can handle much more complex problems, is highly optimised and is written in C **or maybe c++** which speeds up its search time. 
+Using the decoders these can be inputted into the pymatching librarys' method `Pymatching.Matching.decode_batch`. This method uses Minimum weight perfect matching (MWPM) to decode the system. This can described by: building a graph where the detectors are nodes and the possible error mechanisms are edges, weighted by their probability of causing the error, related to length of circuit by $-\log(l) $@Coursera_QEC. Parings are found for the detectors such that the total edge weight is minimised. This represents the "simplest" explanation for what went wrong. Pymatching was used as it can handle much more complex problems, is highly optimised and is written in C++ which speeds up its search time @pymatching. 
+
+
 ### Why is MWPM used instead of a majority vote?
-MWPM is not more accurate that the majority vote method, for an ideal scenario, however it cannot be used for scenarios where different errors have different weights on the graph. It also cannot be transferred to larger systems such as surface codes.
+MWPM is not more accurate that the majority vote method, for an ideal scenario, however it cannot be used for scenarios where different errors have different weights on the graph. It also cannot be transferred to more generall systems such as surface codes.
 
 ## Plotting error code rates
 
-The circuit is then ran 10,000 times and the MWPM was compared to the actual output of no errors ($\ket{00... 0}$ woulndt change) for three different distances, at different error rates, and was plotted.
-
-To get more data the library `sinter` was used to use multiple cpu cores and speed up the processes, this is more of a requirement with even larger classical simulations of quantum circuits, as shown in figure...
-![](circuit.png)
+The circuit is then ran 100,000 times and the MWPM was compared to the actual output $\ket{00... 0}$ for six different distances, at different error rates, and was plotted. As the distances get larger, 100,00 shots takes longer to decode so to speed up the process the library `sinter` was implemented to use multiple cpu cores and speed up the processes, the results are shown in the figure below:
+![](rep_figures/sinter.png)
 
 
 ## Projecting into the future.
-Logical error rates per round decreases exponentially, which is linear on a log scale against d. Therefore for a fixed error probability, sinter was ran for d = 3,5,7,9. Which could then be fit to a straight line and projected, to give a prediction of at a code distance of 20, there will only be one error in a trillion rounds. This is just a large simplification of repetition codes that only take bit flips into account .
+Logical error rates per round decreases exponentially, which is linear on a log scale against d. Therefore for a fixed error probability, sinter was run for disttances d = 3,5,7,9. This was then fit to a straight line and projected, to give a prediction of at a code distance of 20, there will only be one error in a trillion rounds. Although the repetition codes are just an classical approximation of quantum error correction, the figure is of the order of the predictions of real classical systems @Coursera_Stim_Lab
+![](rep_figures/projecting.png) 
 
 ## Takeaways from the quick project
-This is a simple model,  however allowed me to get an understanding of the basics of quantum error correction. the value is pedagogical, ever concept transfering to real ones, and gives me the confidence to look deeper into surface does.
+This is a simple model,  however it gave an understanding of the basics of quantum error correction. the value is pedagogical, each concept transfering to real ones, and gives me the confidence to look deeper into surface codes.

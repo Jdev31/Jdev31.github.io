@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Quantum Error Correction from Scratch: Building a Repetition Code with STIM – Website</title>
+<title>Building and Comparing Decoders on Surface Codes Using Stim – Website</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -132,7 +132,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../QEC/RepetitionCode/RepetitionCode.html">RepetitionCode</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../QEC/UF_Decoder/UF_Decoder.html">Union Find Decoder</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -171,13 +171,13 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../QEC/RepetitionCode/RepetitionCode.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../QEC/RepetitionCode/RepetitionCode.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">RepetitionCode</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../QEC/UF_Decoder/UF_Decoder.html" class="sidebar-item-text sidebar-link">
+  <a href="../../QEC/UF_Decoder/UF_Decoder.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Union Find Decoder</span></a>
   </div>
 </li>
@@ -191,16 +191,14 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#why-quantum-error-correction-matters" id="toc-why-quantum-error-correction-matters" class="nav-link active" data-scroll-target="#why-quantum-error-correction-matters">Why Quantum Error Correction Matters</a></li>
-  <li><a href="#the-repetition-code" id="toc-the-repetition-code" class="nav-link" data-scroll-target="#the-repetition-code">The Repetition Code</a></li>
-  <li><a href="#building-the-circuit-programmatically" id="toc-building-the-circuit-programmatically" class="nav-link" data-scroll-target="#building-the-circuit-programmatically">Building the Circuit Programmatically</a></li>
-  <li><a href="#decoding-with-pymatching" id="toc-decoding-with-pymatching" class="nav-link" data-scroll-target="#decoding-with-pymatching">Decoding with PyMatching</a>
+  <li><a href="#go-through-why-decoders-are-important" id="toc-go-through-why-decoders-are-important" class="nav-link active" data-scroll-target="#go-through-why-decoders-are-important">Go through why decoders are important</a></li>
+  <li><a href="#introduce-basic-workflow-of-uf" id="toc-introduce-basic-workflow-of-uf" class="nav-link" data-scroll-target="#introduce-basic-workflow-of-uf">Introduce basic workflow of UF</a></li>
+  <li><a href="#comparing-union-find-to-mwpm" id="toc-comparing-union-find-to-mwpm" class="nav-link" data-scroll-target="#comparing-union-find-to-mwpm">Comparing Union Find to MWPM</a>
   <ul class="collapse">
-  <li><a href="#why-is-mwpm-used-instead-of-a-majority-vote" id="toc-why-is-mwpm-used-instead-of-a-majority-vote" class="nav-link" data-scroll-target="#why-is-mwpm-used-instead-of-a-majority-vote">Why is MWPM used instead of a majority vote?</a></li>
+  <li><a href="#looking-at-the-speed-scaling" id="toc-looking-at-the-speed-scaling" class="nav-link" data-scroll-target="#looking-at-the-speed-scaling">Looking at the speed scaling</a></li>
+  <li><a href="#compaing-logical-error-predictions-between-uf-and-mwpm" id="toc-compaing-logical-error-predictions-between-uf-and-mwpm" class="nav-link" data-scroll-target="#compaing-logical-error-predictions-between-uf-and-mwpm">Compaing logical error predictions between UF and MWPM</a></li>
   </ul></li>
-  <li><a href="#plotting-error-code-rates" id="toc-plotting-error-code-rates" class="nav-link" data-scroll-target="#plotting-error-code-rates">Plotting error code rates</a></li>
-  <li><a href="#projecting-into-the-future." id="toc-projecting-into-the-future." class="nav-link" data-scroll-target="#projecting-into-the-future.">Projecting into the future.</a></li>
-  <li><a href="#takeaways-from-the-quick-project" id="toc-takeaways-from-the-quick-project" class="nav-link" data-scroll-target="#takeaways-from-the-quick-project">Takeaways from the quick project</a></li>
+  <li><a href="#results-and-future-improvements" id="toc-results-and-future-improvements" class="nav-link" data-scroll-target="#results-and-future-improvements">Results and Future Improvements</a></li>
   </ul>
 </nav>
     </div>
@@ -209,7 +207,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Quantum Error Correction from Scratch: Building a Repetition Code with STIM</h1>
+<h1 class="title">Building and Comparing Decoders on Surface Codes Using Stim</h1>
 </div>
 
 
@@ -226,67 +224,180 @@ window.Quarto = {
 </header>
 
 
-<section id="why-quantum-error-correction-matters" class="level3">
-<h3 class="anchored" data-anchor-id="why-quantum-error-correction-matters">Why Quantum Error Correction Matters</h3>
-<p>Quantum Computers are known to be notoriously easy to disturb, and inherently noisy. Gate errors, decoherence and measurement errors can all lead to corrupt computation. Although errors have decreased dramatically through refined engineering, there is still massive need for error correction via classical computation. This short project follows Googles quantum course on quantum error correction and builds up a simple circuit for repetition code to correct for bit flips (X-errors) using <code>stim</code>. This essay is a brief method for consolidating what I have learnt so far.</p>
+<section id="go-through-why-decoders-are-important" class="level2">
+<h2 class="anchored" data-anchor-id="go-through-why-decoders-are-important">Go through why decoders are important</h2>
+<p>As quantum computers get closer and closer to being able to run error correcting code, the need for a fast scalable classical computer decoder, is becoming more apparent. The decoder of choice if Minimum Weight Perfect Matching (MWPM) which is the most accurate decoder however scales with <span class="math inline">\(O(n^3)\)</span>. This report implements the Union Find Decoder, a slightly less accurate decoder however when optimised, scales with <span class="math inline">\(O(\alpha(n)n)\)</span> where <span class="math inline">\(\alpha &lt;= 3\)</span> <span class="citation" data-cites="Delfosse2021UF">&nbsp;[<a href="#ref-Delfosse2021UF" role="doc-biblioref">1</a>]</span>. Which gives a faster scalable alternative to MWPM. This report will introduces the concepts behind the Union Find decoder and briefly compares a custom Union Find decoder against Pymatchings (MWPM) <span class="citation" data-cites="pymatching">&nbsp;[<a href="#ref-pymatching" role="doc-biblioref">2</a>]</span>.</p>
+<p>The Union Find algorithm is not a complete decoder, Its aim is to quickly produce as erasure graph, where it simplifies the options of of where qubit errors have happened. This erasure graph then needs to be decoded, using a linear time Peeling Decoder, which will also be explained below <span class="citation" data-cites="Delfosse_Peel">&nbsp;[<a href="#ref-Delfosse_Peel" role="doc-biblioref">3</a>]</span>.</p>
 </section>
-<section id="the-repetition-code" class="level3">
-<h3 class="anchored" data-anchor-id="the-repetition-code">The Repetition Code</h3>
-<p>The repetition code works by building a logical qubit out of multiple data qubits that should all individually represent the logical cubit, and a majority vote from all the data qubits is used to remove errors. An example of this is a logical <span class="math inline">\(\ket{0}\)</span> encoded as <span class="math inline">\(\ket{000...0}\)</span>. If the total data qubits used is d, aslong as there are less then or equal to <span class="math inline">\((d-1)/2\)</span> errors, the logical qubit will not be corrupted.</p>
-<p>As the number of data qubits increases, the total number of qubits needed to fail increases linearly and the probability of all of the failing decreases “exponentially” showing that small increases in code distance are increasingly more effective. The caveat of this specific code is it only protects against bit-flip errors, other errors like phase flip errors are not measured, however it is a good starting point as it is the most intuitive introductory method.</p>
-<p>The method of measuring these qubits can be shown in the diagram below, where the states are linked via the CNOT gates which copy the state across</p>
-<p><img src="rep_figures/simple_rep_circuit.png" class="img-fluid"></p>
-<p>The circuit above shows a distance-3 repetition code with 5 qubits in total. <strong>q0, q2, and q4</strong> are the three data qubits that together encode the single logical qubit, while <strong>q1 and q3</strong> are ancilla (measurement) qubits used to detect errors without directly reading the data.</p>
-<p>The circuit proceeds in four broad stages, separated by the bracket groupings along the bottom:</p>
-<ol type="1">
-<li><p><strong>Reset (R):</strong> All five qubits are initialised to <span class="math inline">\(|0\rangle\)</span>. The <code>ERR X 0.001</code> gates that immediately follow inject a 0.1% chance of a bit-flip on each qubit, simulating the physical noise present before any operation takes place.</p></li>
-<li><p><strong>First CNOT layer:</strong> q0 acts as the control for a CNOT targeting q1, and q2 acts as the control for a CNOT targeting q3. A CNOT flips the target qubit if and only if the control is <span class="math inline">\(|1\rangle\)</span>, so after this step q1 holds information about q0 and q3 holds information about q2. The <code>DEP 2</code> gates model the two-qubit depolarising noise that real hardware introduces during each CNOT.</p></li>
-<li><p><strong>Second CNOT layer:</strong> q2 now acts as a second control into q1, and q4 acts as a second control into q3. After both CNOT layers, q1 has effectively measured the <strong>parity of q0 and q2</strong>, if the two data qubits agree it reads 0, if they disagree (i.e.&nbsp;one has flipped) it reads 1. Likewise, q3 measures the parity of q2 and q4. Single-qubit depolarising noise (<code>DEP 1</code>) is applied to the idle data qubits during this time, capturing the fact that doing nothing on real hardware still introduces errors.</p></li>
-<li><p><strong>Measurement and detection:</strong> A final <code>ERR X 0.001</code> layer before measurement models pre-measurement noise, then q1 and q3 are each measured (M). The <strong>DETECTOR</strong> blocks compare these results — <code>D0 = rec[0]</code> at coordinate (1,0) and <code>D1 = rec[1]</code> at coordinate (3,0) — to flag any parity change. If D0 fires it means q0 and q2 disagree; if D1 fires it means q2 and q4 disagree. Together the two detectors pinpoint which data qubit most likely flipped, allowing classical post-processing to apply the correct fix without ever collapsing the logical qubit directly.</p></li>
-</ol>
+<section id="introduce-basic-workflow-of-uf" class="level2">
+<h2 class="anchored" data-anchor-id="introduce-basic-workflow-of-uf">Introduce basic workflow of UF</h2>
+<p>To produce error corrections using the Union Find decoder, there are 3 main steps in the workflow. First is building a graph that can be understood by the Union Find Algorithm. The graphs Nodes represent staibalisers in the surface code and the edges, are data qubits where errors can occur. Staibaliesrs flag a fault in the system by measuring four surounding data qubits and if the result of the measurement is different to expected, that staibaliser will flag a fault, by investigating the which staibalisers are flagged, an esstimate for the error can be made. A more detailed ddescription of Staibaliesrs and surface codes can be found here <span class="citation" data-cites="surace_codes">&nbsp;[<a href="#ref-surace_codes" role="doc-biblioref">4</a>]</span>. The process of generating this graph from stims in built <code>detection_error_model</code> is difficult and for a shortcut Pymatchings graph was piggybacked and converted to supply the nessesary information for the Union Find decoder, this proseccs can be found in <code>uf_decoder.py</code> in my QEC repository <strong>Referece</strong>. A figure of pymatchings graph is shown below:</p>
+<div id="fig-graph" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-graph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="uf_figures/graph.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-graph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Graph of a distance 3 surface code, note the sink node (the node which is attached to all other nodes) is a proxy node that represents the boundary of the graph
+</figcaption>
+</figure>
+</div>
+<!-- ### UF -->
+<p>Using the graph above, the Union Find algorithm can be applied. The Union Find algorithms aim is to create clusters of nodes with an even parity, meaning that it creates clusters of Nodes where an even number of Nodes that have raised a concern are even, The process is shown clearly in the figure below. The process of creating these clusters starts with each error node. Then each cluster’s (single node) edges are grown by half an edge length. When two nodes meet, they are checked to see if they are in the same cluster, If not they form a union and join the same cluster. If both of the nodes had initially raised an error, the parity is even and the clusters stop growing. This loop is repeated untill all clusters have an even parity.</p>
+<div id="fig-graphs1" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-graphs1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-graphs1" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-uf" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-uf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="uf_figures/UF_example.png" class="img-fluid figure-img" data-ref-parent="fig-graphs1">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-uf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Example of the Union Find Decoder Growing Clusters (Credit to <span class="citation" data-cites="Delfosse2021UF">&nbsp;[<a href="#ref-Delfosse2021UF" role="doc-biblioref">1</a>]</span>)
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-graphs1" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-peeling" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-peeling-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="uf_figures/peelingExample.webp" class="img-fluid figure-img" data-ref-parent="fig-graphs1">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-peeling-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) The black lines represents possible erasures, the boxes are nodes and the lighting bolts represents nodes that have thrown an error. (Credit to <span class="citation" data-cites="Hopfmueller2022">&nbsp;[<a href="#ref-Hopfmueller2022" role="doc-biblioref">5</a>]</span>)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-graphs1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Visualisations of algorithms, Figure (a) grid layer is used as it is clear how clusters expand through nodes, Figure (b) uses a more realisitc visualsiation of a graph structure like in <a href="#fig-graph" class="quarto-xref">Figure&nbsp;1</a>
+</figcaption>
+</figure>
+</div>
+<!-- ![Example of the Union Find Decoder Growing Clusters (Credit to @Delfosse2021UF)](uf_figures/UF_example.png){#fig-uf} -->
+<!-- ### Peeling -->
+<!--  -->
+<p>With all these clusters found, the erasures referenced earlier which are used by the peeling decoder are represented by the thick blue lines in <a href="#fig-uf" class="quarto-xref">Figure&nbsp;2 (a)</a>. These erasure edges and their respective Nodes, then have to be traversed into a spanning forest using breadth first search <span class="citation" data-cites="PotatoCoders2020">&nbsp;[<a href="#ref-PotatoCoders2020" role="doc-biblioref">6</a>]</span>. This is done such that the boundary node is traversed first when makeing the spanning forest. This is due to us wanting to peel the boundary node last to stop all errors first option being to claim that the error is between the node and the boundary when there are other more likley options. A simple example of the peeling process is explained next with help with <a href="#fig-peeling" class="quarto-xref">Figure&nbsp;2 (b)</a>. Peeling works by starting at a child edge child edge (an edge that is only attached to one other edge). The node that is only connected to that edge is called pedant vertex, first remove that edge. Then, if the pedant vertex’s flag represents an error, Add the edge to a list of known qubit errors and flip the error state of the other vertex. If the pedant vertex doesnt claim an error, remove the edge and do nothing else. By working through this method, with each round starting with a child edge, on the figure you will quickly find the estimate for the errors is on edges: [13, 16, 19]. Which is correct!</p>
+<!-- ![The black lines represents possible erasures, the boxes are nodes and the lighting bolts represents nodes that have thrown an error. (Credit to @Hopfmueller2022)](uf_figures/peelingExample.webp){#fig-peeling} -->
 </section>
-<section id="building-the-circuit-programmatically" class="level2">
-<h2 class="anchored" data-anchor-id="building-the-circuit-programmatically">Building the Circuit Programmatically</h2>
-<p>After building a repetition code for distance 3 by hand, I automated it using the function <code>create_rep_code_stim_string(distance, rounds, p)</code> which can be found in the <code>rep_code.ipynb</code> jupyter notebook. There are three structural phases to the circuit. There first, resets all of the qubits, then has the first round of measurements, then has detectors that compare to the the exepected initial values of the qubits. The second block, which represents every round apart from the first and last, reset the ancillas only, and repeat CNOT sweeps then measures. Detectors are the created between the previous measurement on and current measuments for each respective ancilla circuit. In the final block, data qubits are measured and compared to a final set of ancilla measurments to create the final detectors.</p>
-<p>Detectors “comparing measurments” represents them comparing the parity of the measurments, if they are both even or both odd, no error is flagged, if they are of different paritys, then an error is flagged.</p>
-<!-- ## Comparing to Stims Built in circuit
-Stim has a built in version method of this function using `stim.Circuit.generated("repetition_code:memory", rounds=..., distance=..., before_round_data_depolarization=p)` However  as shown in the figure below applies noise at less points and is therefore is a less accurate model. The custom model   
-
-![](simple_rep_circuit_1.png) -->
+<section id="comparing-union-find-to-mwpm" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-union-find-to-mwpm">Comparing Union Find to MWPM</h2>
+<p>With The decoder now complete, it can now be compared to Pymatchings MWPM aglorithm. The two main items to test are the scaling of speed and the logical error probability, both of which have been tested and shown below</p>
+<section id="looking-at-the-speed-scaling" class="level3">
+<h3 class="anchored" data-anchor-id="looking-at-the-speed-scaling">Looking at the speed scaling</h3>
+<p>As the custom Union Find decoder was created in python it is linearly slower than pymatchings decoder which is a wrapper to a decoder written in c++ <span class="citation" data-cites="pymatching">&nbsp;[<a href="#ref-pymatching" role="doc-biblioref">2</a>]</span>. This means that at first look the MWPM looks faster however, over several varing distances, it can be seen that the Union Find decoder represents better scaling wich a lower gradient, shown in <a href="#fig-t-s" class="quarto-xref">Figure&nbsp;3 (a)</a>. As it is a loglog plot, a gradient (b) of 1 would be linear decoding time.</p>
+<div id="fig-plots1" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-plots1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-plots1" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-t-s" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-t-s-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="uf_figures/time_vs_size.png" class="img-fluid figure-img" data-ref-parent="fig-plots1">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-t-s-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) loglog plot of per shot decode time against code distance
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-plots1" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-ratio" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-ratio-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="uf_figures/accuracy_gap.png" class="img-fluid figure-img" data-ref-parent="fig-plots1">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-ratio-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Ratio of Union Find Accuracy against MWPM, Positive values show Union Find is less accurate
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plots1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Fist Comparisons of Union Find and MWPM
+</figcaption>
+</figure>
+</div>
+<!-- ![loglog plot of per shot decode time against code distance](uf_figures/time_vs_size.png){#fig-t-s} -->
 </section>
-<section id="decoding-with-pymatching" class="level2">
-<h2 class="anchored" data-anchor-id="decoding-with-pymatching">Decoding with PyMatching</h2>
-<p>Using the decoders these can be inputted into the pymatching librarys’ method <code>Pymatching.Matching.decode_batch</code>. This method uses Minimum weight perfect matching (MWPM) to decode the system. This can described by: building a graph where the detectors are nodes and the possible error mechanisms are edges, weighted by their probability of causing the error, related to length of circuit by $-(l) $<span class="citation" data-cites="Coursera_QEC">&nbsp;[<a href="#ref-Coursera_QEC" role="doc-biblioref">1</a>]</span>. Parings are found for the detectors such that the total edge weight is minimised. This represents the “simplest” explanation for what went wrong. Pymatching was used as it can handle much more complex problems, is highly optimised and is written in C++ which speeds up its search time <span class="citation" data-cites="pymatching">&nbsp;[<a href="#ref-pymatching" role="doc-biblioref">2</a>]</span>.</p>
-<section id="why-is-mwpm-used-instead-of-a-majority-vote" class="level3">
-<h3 class="anchored" data-anchor-id="why-is-mwpm-used-instead-of-a-majority-vote">Why is MWPM used instead of a majority vote?</h3>
-<p>MWPM is not more accurate that the majority vote method, for an ideal scenario, however it cannot be used for scenarios where different errors have different weights on the graph. It also cannot be transferred to more generall systems such as surface codes.</p>
+<section id="compaing-logical-error-predictions-between-uf-and-mwpm" class="level3">
+<h3 class="anchored" data-anchor-id="compaing-logical-error-predictions-between-uf-and-mwpm">Compaing logical error predictions between UF and MWPM</h3>
+<p>As with the reptition code, logical error rate was varied against physical error rate for 3 different distances with both decoders. the ratio of Logical error probability for UF against MWPM is then plotted in <a href="#fig-ratio" class="quarto-xref">Figure&nbsp;3 (b)</a> . As expected the line is always positive showing the Union Find is less accurate, however does the increased spead make it worth it? <!-- ![.](uf_figures/accuracy_gap.png){#fig-ratio} --></p>
+<p>To find out if the union find decoder is worth it for required logical error rate for practicall quantum computing (1e-12) <span class="citation" data-cites="surace_codes">&nbsp;[<a href="#ref-surace_codes" role="doc-biblioref">4</a>]</span>. Similar to the repetition code analysis, both decoders loqical error results could be extrapolated forwards in order to determine the distance required to reach a target logical error. With these target distances and normalising the timings so the C++ MWPM code does not have a systematic error. The timings required for each decoder to decode their required distance could be used to determine which decoder is faster for a required error target. This is shown in <a href="#fig-d-ex" class="quarto-xref">Figure&nbsp;4 (a)</a> and <a href="#fig-t-ex" class="quarto-xref">Figure&nbsp;4 (b)</a></p>
+<div id="fig-plots2" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-plots2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-plots2" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-d-ex" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-d-ex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="uf_figures/distance_extrapolation.png" class="img-fluid figure-img" data-ref-parent="fig-plots2">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-d-ex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Extrapolation of distance required for a logical error level of <span class="math inline">\(1e^{-12}\)</span>. for a data qubit error rate of 0.01:UF requires distance 65, MWPM Requires distance 59.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-plots2" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-t-ex" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-t-ex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="uf_figures/time_extrapolation.png" class="img-fluid figure-img" data-ref-parent="fig-plots2">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-t-ex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Using these distances and The code levels scaled for distance three, the time required is extrapolated forward. Union Find is faster for the required fidelity, with a relative time of 2.2 against MWPM’s required time of 2.59
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plots2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Plots predicting the effectiveness of Union Find and MWPM at real world require logical error levels.
+</figcaption>
+</figure>
+</div>
 </section>
 </section>
-<section id="plotting-error-code-rates" class="level2">
-<h2 class="anchored" data-anchor-id="plotting-error-code-rates">Plotting error code rates</h2>
-<p>The circuit is then ran 100,000 times and the MWPM was compared to the actual output <span class="math inline">\(\ket{00... 0}\)</span> for six different distances, at different error rates, and was plotted. As the distances get larger, 100,00 shots takes longer to decode so to speed up the process the library <code>sinter</code> was implemented to use multiple cpu cores and speed up the processes, the results are shown in the figure below: <img src="rep_figures/sinter.png" class="img-fluid"></p>
-</section>
-<section id="projecting-into-the-future." class="level2">
-<h2 class="anchored" data-anchor-id="projecting-into-the-future.">Projecting into the future.</h2>
-<p>Logical error rates per round decreases exponentially, which is linear on a log scale against d.&nbsp;Therefore for a fixed error probability, sinter was run for disttances d = 3,5,7,9. This was then fit to a straight line and projected, to give a prediction of at a code distance of 20, there will only be one error in a trillion rounds. Although the repetition codes are just an classical approximation of quantum error correction, the figure is of the order of the predictions of real classical systems <span class="citation" data-cites="Coursera_Stim_Lab">&nbsp;[<a href="#ref-Coursera_Stim_Lab" role="doc-biblioref">3</a>]</span> <img src="rep_figures/projecting.png" class="img-fluid"></p>
-</section>
-<section id="takeaways-from-the-quick-project" class="level2">
-<h2 class="anchored" data-anchor-id="takeaways-from-the-quick-project">Takeaways from the quick project</h2>
-<p>This is a simple model, however it gave an understanding of the basics of quantum error correction. the value is pedagogical, each concept transfering to real ones, and gives me the confidence to look deeper into surface codes.</p>
+<section id="results-and-future-improvements" class="level2">
+<h2 class="anchored" data-anchor-id="results-and-future-improvements">Results and Future Improvements</h2>
+<p>Using my custom decoding algorith based off <span class="citation" data-cites="Delfosse2021UF">&nbsp;[<a href="#ref-Delfosse2021UF" role="doc-biblioref">1</a>]</span> <span class="citation" data-cites="Delfosse_Peel">&nbsp;[<a href="#ref-Delfosse_Peel" role="doc-biblioref">3</a>]</span>, I found as expected, that the custom UF decoder is slower per shot in absolute terms however scales better than MWPM. This scaling is useful as decoders will be required to decoder over large surface code distances therefor linear or near linear decoders are a must.</p>
+<p>There are a few limitations to this experiments, in future I should go back and add errors to all the figures, as error rates come from a finite number of shots they carry a binomial sampling error which could be incoperated into calculations. The extrapolations are only over a few small distances, to get more presice results, It shold be run over longer distrances and shots, which could be done quicker with the incorperation of using multiple CPU codes with sinter. The python, C++ comparison using normalisation is crude, and a much more accurate representation would be to rewrite the UF decoder in a compiled language. The error correction is single round, so measurement errors are not decodeed and only one error sector is decoded (X errosr). This is a simple fix as X and Z errors are independant and the piggybacking of the PYmatchings graph means multiple rounds can easily be incorperated, however werent added here for simplicity. Threshold should aslo be measured to quantitvley display how logical error detetiction compares over these smaller distances at different error rates, for UF and MWPM- ALSO WEIGHTED GRAPH DECODER</p>
+<p>What i have learnt: How Stim builds a detection error model and how that maps onto a graph of stabilisers and data qubits, and why building that graph correctly is a large part of the work. That a decoder is not one algorithm. UF only produces the erasure, and the peeling decoder is what actually returns a correction. The speed and accuracy tradeoff is the real question, not either quantity on its own, since a less accurate decoder can still win if it lets you decode faster than the syndrome extraction cycle. Practical insight into why decoding is a bottleneck for scaling quantum computers, rather than a solved side problem.</p>
+<p>Port the UF decoder to C++ or Rust for a fair timing comparison. Extend to circuit level noise and multi round syndrome extraction. Implement weighted growth to close the accuracy gap with MWPM.</p>
 
 
 
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
-<div id="ref-Coursera_QEC" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline"><a href="https://www.coursera.org/learn/quantum-error-correction/supplement/BMoJJ/video-slides-qec-ii-detecting-bit-flips-and-phase-flips">QEC II: Detecting bit flips and phase flips</a>.</div>
+<div id="ref-Delfosse2021UF" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">N. Delfosse and N. H. Nickerson, <a href="https://doi.org/10.22331/q-2021-12-02-595">Almost-linear time decoding algorithm for topological codes</a>, <span>Quantum</span> <strong>5</strong>, 595 (2021).</div>
 </div>
 <div id="ref-pymatching" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[2] </div><div class="csl-right-inline">O. Higgott and C. Gidney, <a href="https://doi.org/10.22331/q-2025-01-20-1600">Sparse <span>B</span>lossom: Correcting a million errors per core second with minimum-weight matching</a>, <span>Quantum</span> <strong>9</strong>, 1600 (2025).</div>
 </div>
-<div id="ref-Coursera_Stim_Lab" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[3] </div><div class="csl-right-inline"><a href="https://www.coursera.org/learn/quantum-error-correction/ungradedLab/fN352/introduction-to-stim-lab">Introduction to stim lab</a>.</div>
+<div id="ref-Delfosse_Peel" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">N. Delfosse and G. Zémor, <a href="https://doi.org/10.1103/physrevresearch.2.033042">Linear-time maximum likelihood decoding of surface codes over the quantum erasure channel</a>, Physical Review Research <strong>2</strong>, (2020).</div>
+</div>
+<div id="ref-surace_codes" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">A. G. Fowler, M. Mariantoni, J. M. Martinis, and A. N. Cleland, <a href="https://doi.org/10.1103/physreva.86.032324">Surface codes: Towards practical large-scale quantum computation</a>, Physical Review A <strong>86</strong>, (2012).</div>
+</div>
+<div id="ref-Hopfmueller2022" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">F. Hopfmueller, <a href="https://medium.com/@fhopfmueller/decoding-quantum-erasure-errors-in-the-surface-code-with-the-peeling-decoder-d1f6a677ae69">Decoding quantum erasure errors in the surface code with the peeling decoder</a>, (2022).</div>
+</div>
+<div id="ref-PotatoCoders2020" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">P. Coders, <a href="https://www.youtube.com/watch?v=ayW5B2W9hfo">Union find in 5 minutes: Data structures and algorithms</a>, (2020).</div>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
