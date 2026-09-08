@@ -5,3 +5,6 @@
 
 /.quarto/
 **/*.quarto_ipynb
+
+# Rendered site (built by CI)
+/_site/

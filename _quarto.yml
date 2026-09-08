@@ -3,6 +3,7 @@ project:
 
 website:
   title: "Website"
+  site-url: https://jdev31.github.io
   sidebar:
     style: "floating"
     search: true

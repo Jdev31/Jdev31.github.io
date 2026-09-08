@@ -110,7 +110,7 @@ The Lorentz boost is then applied to all the vertices of the shape in question. 
 
 This matrix transform was then applied to each vertex for a cube and sphere, shown in @fig-length-contraction
 
-![Relativistic length contraction. Comparison of a cube and sphere at rest versus $0.99c$.](Figures_TP\image_Lorentz_004_0004.jpg){#fig-length-contraction fig-align="center" width="100%"}
+![Relativistic length contraction. Comparison of a cube and sphere at rest versus $0.99c$.](Figures_TP/image_Lorentz_004_0004.jpg){#fig-length-contraction fig-align="center" width="100%"}
 
 # Applying the Terrel-Penrose Effect
 
