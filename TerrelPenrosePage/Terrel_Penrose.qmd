@@ -9,6 +9,8 @@ csl: ../american-physics-society.csl
 css: ../styles.css
 ---
 
+Check out the repository at: <https://github.com/Jdev31/Terrel_Penrose_Effect_Simulation>
+
 # Introduction
 This project aimed at comparing the effects length contraction to the the visual appearance of shapes at relativistic speeds. Until 1959 the visual appearance 3D objects was not considered, only the physical effects in different reference frames. Rodger Penrose and James Terrell, then independently showed objects tend to rotate instead of contract at relativistic speeds.
 

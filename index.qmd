@@ -1,32 +1,39 @@
 ---
-title: "Welcome — James Healy"
+title: "Hi, I'm Jamie"
 format:
   html:
     toc: false
     theme: cosmo
 ---
 
-# Hi, I’m James Healy
 
-I’m a first-year undergraduate **physics student at the University of Bristol**, and I build computational and experimental projects that combine physics, math, and code.
+I’m a third-year Physics (Msci) undergraduate student at the University of Bristol
+You can find my projects on github at https://github.com/Jdev31 or you can find some more in depth descriptions in the other sections of the website.
 
-You can explore some of my work below:
+## Recent Projects
 
-## 🚀 Featured Projects
+### **Simulating the Terrel-Penrose Effect**
+Comparing the effects of length contraction to the visual appearance of simple shapes at relativistic speeds
+
+### **The Repetition Code: An Introduction to Quantum Error Correction**
+Using Googles python library `stim` to build a classical Repetition Code error correction from scratch, and Investigating the how the logical error rate depends on code distance 
+
+### **Building and Comparing Decoders on Surface Codes Using Stim**
+Different error correction codes usually have tradeoff between scalability and accuracy. I devloped a Union Find Decoder code and compared it to Minimum Weight Perfect Matching for a surface code.
+
+### **Building a Physics Informed Neural Network (PINN)**
+Created a PINN that forecasts the position of a one dimensional simple harmonic oscillator.
+Implemented a Baysian Optimisation Algorithm to optimise the hyperparameters of the model 
+
+
+## Older Projects Found on Github
 
 ### **GravitySim**
-A numerical simulation of the **three-body problem**, written in C#.  
+A numerical simulation of the three-body problem, written in C#.  
 Shows gravitational dynamics between three interacting bodies.
 
 ### **OilDropExp**
-The complete **Millikan oil drop experiment** report from first-year labs — with data analysis code in Python and the final formal write-up included.
+The complete Millikan oil drop experiment report from my first-year labs — with data analysis code in Python and the final formal write-up included.
 
 ### **ArtifactCode**
-C# code developed as part of my **Extended Project Qualification (EPQ)** along with the written essay.
-
----
-
-## 📫 Find me online
-
-Check out all of these and more on my GitHub:  
-👉 https://github.com/Jdev31
+C# code developed as part of my Extended Project Qualification (EPQ) along with the written essay.

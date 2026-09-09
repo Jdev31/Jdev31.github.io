@@ -9,7 +9,7 @@ csl: ../../american-physics-society.csl
 css: ../../styles.css
 ---
 
-
+Check out the repository at: <https://github.com/Jdev31/IntroToStim>
 
 ### Why Quantum Error Correction Matters
 Quantum Computers are known to be notoriously easy to disturb, and inherently noisy. Gate errors, decoherence  and measurement errors can all lead to corrupt computation.  Although errors have decreased dramatically through refined engineering, there is still massive need for error correction via classical computation. This short project follows Googles quantum course on quantum error correction and builds up a simple circuit for repetition code to correct for bit flips (X-errors) using `stim`. This essay is a brief method for consolidating what I have learnt so far. 

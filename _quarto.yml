@@ -16,6 +16,8 @@ website:
         text: "RepetitionCode"
       - href: QEC/UF_Decoder/UF_Decoder.qmd
         text: "Union Find Decoder"
+      - href: ForecastingOscillators/ForecastingOscilators.qmd
+        text: "Creating a PINN"
 
 format:
   html:

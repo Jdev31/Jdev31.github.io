@@ -9,6 +9,8 @@ csl: ../../american-physics-society.csl
 css: ../../styles.css
 ---
 
+Check out the repository at: <https://github.com/Jdev31/UFDecoder>
+
 ## Go through why decoders are important
 As quantum computers get closer and closer to being able to run error correcting code, the need for a fast scalable classical computer decoder, is becoming more apparent. The decoder of choice if Minimum Weight Perfect Matching (MWPM) which is the most accurate decoder however scales with  $O(n^3)$. This report implements the Union Find Decoder, a slightly less accurate decoder however when optimised, scales with $O(\alpha(n)n)$ where $\alpha <= 3$ @Delfosse2021UF. Which gives a faster scalable alternative to MWPM. This report will introduces the concepts behind the Union Find decoder and briefly compares a custom Union Find decoder against Pymatching's (MWPM) @pymatching.
 
