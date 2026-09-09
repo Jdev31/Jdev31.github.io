@@ -5,8 +5,8 @@ format:
     toc: true
     theme: cosmo
 bibliography: UF_references.bib
-csl: /mnt/storage/Programming/Website/american-physics-society.csl
-css: /mnt/storage/Programming/Website/styles.css
+csl: ../../american-physics-society.csl
+css: ../../styles.css
 ---
 
 ## Go through why decoders are important
